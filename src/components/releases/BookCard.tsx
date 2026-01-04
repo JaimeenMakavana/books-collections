@@ -1,14 +1,24 @@
+'use client';
+
 import { Plus, Star } from 'lucide-react';
 import type { BookRelease } from '@/data/releases';
+import { useCart } from '@/contexts/CartContext';
 
 interface BookCardProps {
   book: BookRelease;
 }
 
 export default function BookCard({ book }: BookCardProps) {
+  const { addItem } = useCart();
   const isOutOfStock = book.stockStatus === 'out-of-stock';
   const isLowStock = book.stockStatus === 'low-stock';
   const isPreOrder = book.stockStatus === 'pre-order';
+
+  const handleAddToCart = () => {
+    if (!isOutOfStock) {
+      addItem(book);
+    }
+  };
 
   return (
     <div className="min-w-[260px] sm:min-w-[280px] md:min-w-[320px] snap-center group flex-shrink-0">
@@ -52,7 +62,11 @@ export default function BookCard({ book }: BookCardProps) {
 
         {/* Add to Cart Button */}
         {!isOutOfStock && (
-          <button className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 bg-[var(--color-ink)] text-[var(--color-accent)] p-2 sm:p-3 rounded-xl opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+          <button
+            onClick={handleAddToCart}
+            className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 bg-[var(--color-ink)] text-[var(--color-accent)] p-2 sm:p-3 rounded-xl opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[var(--color-accent)] hover:text-[var(--color-ink)]"
+            aria-label={`Add ${book.title} to cart`}
+          >
             <Plus className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2]" />
           </button>
         )}

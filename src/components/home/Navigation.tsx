@@ -3,8 +3,11 @@
 import { Menu, Search, ShoppingCart } from 'lucide-react';
 import { useEffect } from 'react';
 import Link from 'next/link';
+import { useCart } from '@/contexts/CartContext';
 
 export default function Navigation() {
+  const { itemCount } = useCart();
+
   useEffect(() => {
     // Initialize Lucide icons if needed
   }, []);
@@ -35,12 +38,15 @@ export default function Navigation() {
           <button className="hidden md:block hover:bg-[var(--color-accent)] rounded-lg p-2 border border-transparent hover:border-[var(--color-ink)] transition-all">
             <Search className="w-5 h-5 stroke-[1.5]" />
           </button>
-          <button className="bg-[var(--color-ink)] text-[var(--color-accent)] px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg font-display text-xs sm:text-sm border-2 border-[var(--color-ink)] hover:bg-[var(--color-accent)] hover:text-[var(--color-ink)] transition-colors flex items-center gap-1 sm:gap-2 whitespace-nowrap">
+          <Link
+            href="/cart"
+            className="bg-[var(--color-ink)] text-[var(--color-accent)] px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-lg font-display text-xs sm:text-sm border-2 border-[var(--color-ink)] hover:bg-[var(--color-accent)] hover:text-[var(--color-ink)] transition-colors flex items-center gap-1 sm:gap-2 whitespace-nowrap"
+          >
             <ShoppingCart className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span className="hidden xs:inline">CART</span>
-            <span className="xs:hidden">(0)</span>
-            <span className="hidden xs:inline">(0)</span>
-          </button>
+            <span className="xs:hidden">({itemCount})</span>
+            <span className="hidden xs:inline">({itemCount})</span>
+          </Link>
         </div>
       </div>
     </nav>
