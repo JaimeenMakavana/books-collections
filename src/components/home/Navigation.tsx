@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { Menu, Search, ShoppingCart } from 'lucide-react';
-import { useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useCart } from '@/contexts/CartContext';
+import { Menu, Search, ShoppingCart } from "lucide-react";
+import { useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCart } from "@/contexts/CartContext";
 
 export default function Navigation() {
   const { itemCount } = useCart();
@@ -16,39 +16,76 @@ export default function Navigation() {
 
   // Helper function to check if a link is active
   const isActive = (href: string) => {
-    if (href === '/') {
-      return pathname === '/';
+    if (href === "/") {
+      return pathname === "/";
     }
     // For genre routes, check if pathname starts with /genre
-    if (href === '/genre') {
-      return pathname.startsWith('/genre');
+    if (href === "/genre") {
+      return pathname.startsWith("/genre");
     }
     return pathname.startsWith(href);
   };
 
   // Active link styles
-  const activeLinkClass = "text-[var(--color-accent)] bg-[var(--color-ink)] px-3 py-1 rounded transition-colors";
-  const inactiveLinkClass = "hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors";
+  const activeLinkClass =
+    "text-[var(--color-accent)] bg-[var(--color-ink)] px-3 py-1 rounded transition-colors";
+  const inactiveLinkClass =
+    "hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors";
 
   return (
-    <nav className="sticky top-2 sm:top-4 z-50 px-3 sm:px-4 md:px-8">
-      <div className="bg-[var(--color-paper)]/80 backdrop-blur-md border-2 border-[var(--color-ink)] rounded-lg md:rounded-xl shadow-[var(--shadow-hard)] flex justify-between items-center p-2 sm:p-3 md:p-4 gap-2 sm:gap-4">
+    <header className="sticky top-0 z-50 w-full bg-[var(--color-paper)] py-2">
+      <nav className="bg-[var(--color-paper)]/80 backdrop-blur-md border-2 border-[var(--color-ink)] rounded-lg md:rounded-xl shadow-[var(--shadow-hard)] flex justify-between items-center p-2 sm:p-3 md:p-4 gap-2 sm:gap-4 mx-2 sm:mx-4 md:mx-8">
         {/* Mobile Menu */}
         <button className="md:hidden p-1.5 sm:p-2 hover:bg-[var(--color-accent)] rounded-lg border border-transparent hover:border-[var(--color-ink)] transition-all flex-shrink-0">
           <Menu className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5]" />
         </button>
 
         {/* Logo */}
-        <Link href="/" className="text-xl sm:text-2xl md:text-3xl font-display tracking-tighter flex items-center gap-1 flex-shrink-0">
-          BOOK<span className="text-[var(--color-accent)]" style={{ WebkitTextStroke: '1px var(--color-ink)' }}>SHELF</span>
+        <Link
+          href="/"
+          className="text-xl sm:text-2xl md:text-3xl font-display tracking-tighter flex items-center gap-1 flex-shrink-0"
+        >
+          BOOK
+          <span
+            className="text-[var(--color-accent)]"
+            style={{ WebkitTextStroke: "1px var(--color-ink)" }}
+          >
+            SHELF
+          </span>
         </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8 font-semibold text-sm tracking-tight">
-          <Link href="/releases" className={isActive('/releases') ? activeLinkClass : inactiveLinkClass}>NEW RELEASES</Link>
-          <Link href="/best-sellers" className={isActive('/best-sellers') ? activeLinkClass : inactiveLinkClass}>BESTSELLERS</Link>
-          <Link href="/genre" className={isActive('/genre') ? activeLinkClass : inactiveLinkClass}>GENRES</Link>
-          <Link href="/collections" className={isActive('/collections') ? activeLinkClass : inactiveLinkClass}>COLLECTIONS</Link>
+          <Link
+            href="/releases"
+            className={
+              isActive("/releases") ? activeLinkClass : inactiveLinkClass
+            }
+          >
+            NEW RELEASES
+          </Link>
+          <Link
+            href="/best-sellers"
+            className={
+              isActive("/best-sellers") ? activeLinkClass : inactiveLinkClass
+            }
+          >
+            BESTSELLERS
+          </Link>
+          <Link
+            href="/genre"
+            className={isActive("/genre") ? activeLinkClass : inactiveLinkClass}
+          >
+            GENRES
+          </Link>
+          <Link
+            href="/collections"
+            className={
+              isActive("/collections") ? activeLinkClass : inactiveLinkClass
+            }
+          >
+            COLLECTIONS
+          </Link>
         </div>
 
         {/* Actions */}
@@ -66,8 +103,7 @@ export default function Navigation() {
             <span className="hidden xs:inline">({itemCount})</span>
           </Link>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }
-

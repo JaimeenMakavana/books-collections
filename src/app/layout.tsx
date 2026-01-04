@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { CartProvider } from "@/contexts/CartContext";
+import Navigation from "@/components/home/Navigation";
 
 export const metadata: Metadata = {
   title: "Bookshelf | Curated Book Collections",
@@ -21,8 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <CartProvider>{children}</CartProvider>
+      <body className="antialiased h-dvh">
+        <CartProvider>
+          <Navigation />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

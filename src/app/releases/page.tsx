@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Navigation from "@/components/home/Navigation";
 import Footer from "@/components/home/Footer";
 import ReleasesGrid from "@/components/releases/ReleasesGrid";
 import { releases } from "@/data/releases";
@@ -13,7 +12,6 @@ export const metadata: Metadata = {
 export default function ReleasesPage() {
   return (
     <div className="font-sans antialiased selection:bg-accent selection:text-ink min-h-screen flex flex-col">
-      <Navigation />
       <main className="flex-1">
         {/* Header */}
         <section className="py-8 sm:py-12 md:py-16 border-b-2 border-[var(--color-ink)]">

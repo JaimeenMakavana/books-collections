@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
-import { useCart } from '@/contexts/CartContext';
-import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import { useCart } from "@/contexts/CartContext";
+import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function CartPage() {
-  const { items, itemCount, total, updateQuantity, removeItem, clearCart } = useCart();
+  const { items, itemCount, total, updateQuantity, removeItem, clearCart } =
+    useCart();
 
   if (items.length === 0) {
     return (
@@ -20,7 +21,8 @@ export default function CartPage() {
               Your cart is empty
             </h2>
             <p className="text-sm sm:text-base opacity-60 mb-8 max-w-md mx-auto">
-              Looks like you haven't added any books to your cart yet. Start exploring our collection!
+              Looks like you haven't added any books to your cart yet. Start
+              exploring our collection!
             </p>
             <Link
               href="/"
@@ -64,7 +66,11 @@ export default function CartPage() {
                     <div
                       className={`w-full sm:w-24 h-32 sm:h-32 bg-gradient-to-br ${item.coverColor} rounded-lg border-2 border-[var(--color-ink)] flex items-center justify-center text-white font-bold text-xs sm:text-sm p-2`}
                     >
-                      {item.title.split(' ').slice(0, 2).join(' ').toUpperCase()}
+                      {item.title
+                        .split(" ")
+                        .slice(0, 2)
+                        .join(" ")
+                        .toUpperCase()}
                     </div>
                   </div>
 
@@ -99,10 +105,14 @@ export default function CartPage() {
                     {/* Quantity Controls */}
                     <div className="flex items-center justify-between mt-4 pt-4 border-t border-[var(--color-ink)]/20">
                       <div className="flex items-center gap-2 sm:gap-3">
-                        <span className="text-xs sm:text-sm font-semibold opacity-60">Quantity:</span>
+                        <span className="text-xs sm:text-sm font-semibold opacity-60">
+                          Quantity:
+                        </span>
                         <div className="flex items-center gap-1 sm:gap-2 border-2 border-[var(--color-ink)] rounded-lg">
                           <button
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            onClick={() =>
+                              updateQuantity(item.id, item.quantity - 1)
+                            }
                             className="p-1.5 sm:p-2 hover:bg-[var(--color-accent)] rounded-l-md transition-colors"
                             aria-label="Decrease quantity"
                           >
@@ -112,7 +122,9 @@ export default function CartPage() {
                             {item.quantity}
                           </span>
                           <button
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            onClick={() =>
+                              updateQuantity(item.id, item.quantity + 1)
+                            }
                             className="p-1.5 sm:p-2 hover:bg-[var(--color-accent)] rounded-r-md transition-colors"
                             aria-label="Increase quantity"
                           >
@@ -181,4 +193,3 @@ export default function CartPage() {
     </div>
   );
 }
-

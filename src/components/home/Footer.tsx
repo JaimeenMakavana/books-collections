@@ -97,7 +97,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between items-center pt-6 sm:pt-8 border-t border-[var(--color-paper)]/20 text-xs font-bold opacity-40 gap-3 sm:gap-0">
-          <p>© 2024 Bookshelf. Est. 2024.</p>
+          <p>© 2026 Bookshelf. Est. 2026.</p>
           <div className="flex gap-4 sm:gap-6">
             <a href="#">Privacy</a>
             <a href="#">Terms</a>

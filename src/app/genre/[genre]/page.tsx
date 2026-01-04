@@ -1,17 +1,16 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import Navigation from '@/components/home/Navigation';
-import Footer from '@/components/home/Footer';
-import ReleasesGrid from '@/components/releases/ReleasesGrid';
-import { releases } from '@/data/releases';
-import type { BookRelease } from '@/data/releases';
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Footer from "@/components/home/Footer";
+import ReleasesGrid from "@/components/releases/ReleasesGrid";
+import { releases } from "@/data/releases";
+import type { BookRelease } from "@/data/releases";
 
 // Generate static params for all genres
 export async function generateStaticParams() {
   const allGenres = new Set<string>();
   releases.forEach((book) => {
     book.genres.forEach((genre) => {
-      allGenres.add(genre.toLowerCase().replace(/\s+/g, '-'));
+      allGenres.add(genre.toLowerCase().replace(/\s+/g, "-"));
     });
   });
   return Array.from(allGenres).map((genre) => ({ genre }));
@@ -19,11 +18,14 @@ export async function generateStaticParams() {
 
 // Normalize genre name for comparison
 function normalizeGenre(genreParam: string): string {
-  return genreParam.replace(/-/g, ' ').toLowerCase();
+  return genreParam.replace(/-/g, " ").toLowerCase();
 }
 
 // Find matching genre from book genres (case-insensitive, handles spaces/dashes)
-function findMatchingGenre(genreParam: string, bookGenres: string[]): string | null {
+function findMatchingGenre(
+  genreParam: string,
+  bookGenres: string[]
+): string | null {
   const normalized = normalizeGenre(genreParam);
   return bookGenres.find((g) => g.toLowerCase() === normalized) || null;
 }
@@ -49,27 +51,31 @@ function getGenreDisplayName(genreParam: string): string {
       }
     }
   }
-  return genreParam.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+  return genreParam.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
 }
 
 interface GenrePageProps {
   params: Promise<{ genre: string }>;
 }
 
-export async function generateMetadata({ params }: GenrePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: GenrePageProps): Promise<Metadata> {
   const { genre } = await params;
   const displayName = getGenreDisplayName(genre);
   const books = getBooksByGenre(genre);
 
   if (books.length === 0) {
     return {
-      title: 'Genre Not Found | Bookshelf',
+      title: "Genre Not Found | Bookshelf",
     };
   }
 
   return {
     title: `${displayName} Books | Bookshelf`,
-    description: `Discover our collection of ${displayName.toLowerCase()} books. Browse ${books.length} titles with detailed information, ratings, and reviews.`,
+    description: `Discover our collection of ${displayName.toLowerCase()} books. Browse ${
+      books.length
+    } titles with detailed information, ratings, and reviews.`,
   };
 }
 
@@ -84,7 +90,6 @@ export default async function GenrePage({ params }: GenrePageProps) {
 
   return (
     <div className="font-sans antialiased selection:bg-accent selection:text-ink min-h-screen flex flex-col">
-      <Navigation />
       <main className="flex-1">
         {/* Header */}
         <section className="py-8 sm:py-12 md:py-16 border-b-2 border-[var(--color-ink)]">
@@ -93,8 +98,10 @@ export default async function GenrePage({ params }: GenrePageProps) {
               {displayName.toUpperCase()}
             </h1>
             <p className="text-base sm:text-lg opacity-70 max-w-2xl">
-              Explore our collection of {displayName.toLowerCase()} books. Discover {books.length} carefully curated
-              titles with detailed information, ratings, and reviews to help you find your next great read.
+              Explore our collection of {displayName.toLowerCase()} books.
+              Discover {books.length} carefully curated titles with detailed
+              information, ratings, and reviews to help you find your next great
+              read.
             </p>
           </div>
         </section>
@@ -108,4 +115,3 @@ export default async function GenrePage({ params }: GenrePageProps) {
     </div>
   );
 }
-
