@@ -1,12 +1,13 @@
-import type { Metadata } from 'next';
-import Navigation from '@/components/home/Navigation';
-import Footer from '@/components/home/Footer';
-import ReleasesGrid from '@/components/releases/ReleasesGrid';
-import { releases } from '@/data/releases';
+import type { Metadata } from "next";
+import Navigation from "@/components/home/Navigation";
+import Footer from "@/components/home/Footer";
+import ReleasesGrid from "@/components/releases/ReleasesGrid";
+import { releases } from "@/data/releases";
 
 export const metadata: Metadata = {
-  title: 'Best Sellers | Bookshelf',
-  description: 'Discover our bestselling books. Browse top-rated titles across all genres with comprehensive details, ratings, and reviews.',
+  title: "Best Sellers | Bookshelf",
+  description:
+    "Discover our bestselling books. Browse top-rated titles across all genres with comprehensive details, ratings, and reviews.",
 };
 
 export default function BestSellersPage() {
@@ -24,8 +25,9 @@ export default function BestSellersPage() {
               BEST SELLERS
             </h1>
             <p className="text-base sm:text-lg opacity-70 max-w-2xl">
-              Explore our bestselling collection of books across all genres. These top-rated titles
-              have captured readers' hearts with compelling stories, expert insights, and exceptional quality.
+              Explore our bestselling collection of books across all genres.
+              These top-rated titles have captured readers' hearts with
+              compelling stories, expert insights, and exceptional quality.
             </p>
           </div>
         </section>
@@ -39,4 +41,3 @@ export default function BestSellersPage() {
     </div>
   );
 }
-

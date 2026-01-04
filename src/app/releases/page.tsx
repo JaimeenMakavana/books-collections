@@ -1,12 +1,13 @@
-import type { Metadata } from 'next';
-import Navigation from '@/components/home/Navigation';
-import Footer from '@/components/home/Footer';
-import ReleasesGrid from '@/components/releases/ReleasesGrid';
-import { releases } from '@/data/releases';
+import type { Metadata } from "next";
+import Navigation from "@/components/home/Navigation";
+import Footer from "@/components/home/Footer";
+import ReleasesGrid from "@/components/releases/ReleasesGrid";
+import { releases } from "@/data/releases";
 
 export const metadata: Metadata = {
-  title: 'New Releases | Bookshelf',
-  description: 'Discover the latest book releases. Browse new titles across all genres with comprehensive details, ratings, and reviews.',
+  title: "New Releases | Bookshelf",
+  description:
+    "Discover the latest book releases. Browse new titles across all genres with comprehensive details, ratings, and reviews.",
 };
 
 export default function ReleasesPage() {
@@ -21,8 +22,9 @@ export default function ReleasesPage() {
               NEW RELEASES
             </h1>
             <p className="text-base sm:text-lg opacity-70 max-w-2xl">
-              Explore our latest collection of books across all genres. From bestsellers to hidden gems,
-              discover your next great read with detailed information, ratings, and reviews.
+              Explore our latest collection of books across all genres. From
+              bestsellers to hidden gems, discover your next great read with
+              detailed information, ratings, and reviews.
             </p>
           </div>
         </section>
@@ -36,4 +38,3 @@ export default function ReleasesPage() {
     </div>
   );
 }
-

@@ -3,14 +3,32 @@
 import { Menu, Search, ShoppingCart } from 'lucide-react';
 import { useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useCart } from '@/contexts/CartContext';
 
 export default function Navigation() {
   const { itemCount } = useCart();
+  const pathname = usePathname();
 
   useEffect(() => {
     // Initialize Lucide icons if needed
   }, []);
+
+  // Helper function to check if a link is active
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/';
+    }
+    // For genre routes, check if pathname starts with /genre
+    if (href === '/genre') {
+      return pathname.startsWith('/genre');
+    }
+    return pathname.startsWith(href);
+  };
+
+  // Active link styles
+  const activeLinkClass = "text-[var(--color-accent)] bg-[var(--color-ink)] px-3 py-1 rounded transition-colors";
+  const inactiveLinkClass = "hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors";
 
   return (
     <nav className="sticky top-2 sm:top-4 z-50 px-3 sm:px-4 md:px-8">
@@ -27,10 +45,10 @@ export default function Navigation() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8 font-semibold text-sm tracking-tight">
-          <Link href="/releases" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">NEW RELEASES</Link>
-          <Link href="/best-sellers" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">BESTSELLERS</Link>
-          <Link href="/genre" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">GENRES</Link>
-          <Link href="/collections" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">COLLECTIONS</Link>
+          <Link href="/releases" className={isActive('/releases') ? activeLinkClass : inactiveLinkClass}>NEW RELEASES</Link>
+          <Link href="/best-sellers" className={isActive('/best-sellers') ? activeLinkClass : inactiveLinkClass}>BESTSELLERS</Link>
+          <Link href="/genre" className={isActive('/genre') ? activeLinkClass : inactiveLinkClass}>GENRES</Link>
+          <Link href="/collections" className={isActive('/collections') ? activeLinkClass : inactiveLinkClass}>COLLECTIONS</Link>
         </div>
 
         {/* Actions */}

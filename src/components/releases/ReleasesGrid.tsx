@@ -1,46 +1,56 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { ArrowLeft, ArrowRight, Filter, Grid, List } from 'lucide-react';
-import BookCard from './BookCard';
-import type { BookRelease } from '@/data/releases';
+import { useState } from "react";
+import { ArrowLeft, ArrowRight, Filter, Grid, List } from "lucide-react";
+import BookCard from "./BookCard";
+import type { BookRelease } from "@/data/releases";
 
 interface ReleasesGridProps {
   books: BookRelease[];
 }
 
-type SortOption = 'newest' | 'oldest' | 'price-low' | 'price-high' | 'rating' | 'title';
-type FilterOption = 'all' | 'bestseller' | 'in-stock' | 'pre-order';
+type SortOption =
+  | "newest"
+  | "oldest"
+  | "price-low"
+  | "price-high"
+  | "rating"
+  | "title";
+type FilterOption = "all" | "bestseller" | "in-stock" | "pre-order";
 
 export default function ReleasesGrid({ books }: ReleasesGridProps) {
-  const [sortBy, setSortBy] = useState<SortOption>('newest');
-  const [filterBy, setFilterBy] = useState<FilterOption>('all');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [sortBy, setSortBy] = useState<SortOption>("newest");
+  const [filterBy, setFilterBy] = useState<FilterOption>("all");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
 
   // Filter books
   const filteredBooks = books.filter((book) => {
-    if (filterBy === 'bestseller') return book.bestseller;
-    if (filterBy === 'in-stock') return book.stockStatus === 'in-stock';
-    if (filterBy === 'pre-order') return book.stockStatus === 'pre-order';
+    if (filterBy === "bestseller") return book.bestseller;
+    if (filterBy === "in-stock") return book.stockStatus === "in-stock";
+    if (filterBy === "pre-order") return book.stockStatus === "pre-order";
     return true;
   });
 
   // Sort books
   const sortedBooks = [...filteredBooks].sort((a, b) => {
     switch (sortBy) {
-      case 'newest':
-        return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
-      case 'oldest':
-        return new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime();
-      case 'price-low':
+      case "newest":
+        return (
+          new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
+        );
+      case "oldest":
+        return (
+          new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime()
+        );
+      case "price-low":
         return a.price - b.price;
-      case 'price-high':
+      case "price-high":
         return b.price - a.price;
-      case 'rating':
+      case "rating":
         return b.rating - a.rating;
-      case 'title':
+      case "title":
         return a.title.localeCompare(b.title);
       default:
         return 0;
@@ -50,7 +60,10 @@ export default function ReleasesGrid({ books }: ReleasesGridProps) {
   // Pagination
   const totalPages = Math.ceil(sortedBooks.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedBooks = sortedBooks.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedBooks = sortedBooks.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   const handlePrevious = () => {
     setCurrentPage((prev) => Math.max(1, prev - 1));
@@ -104,14 +117,22 @@ export default function ReleasesGrid({ books }: ReleasesGridProps) {
         {/* View Mode Toggle */}
         <div className="flex items-center gap-2 border-2 border-[var(--color-ink)] rounded-lg p-1">
           <button
-            onClick={() => setViewMode('grid')}
-            className={`p-2 rounded ${viewMode === 'grid' ? 'bg-[var(--color-ink)] text-[var(--color-accent)]' : 'hover:bg-[var(--color-accent)]'}`}
+            onClick={() => setViewMode("grid")}
+            className={`p-2 rounded ${
+              viewMode === "grid"
+                ? "bg-[var(--color-ink)] text-[var(--color-accent)]"
+                : "hover:bg-[var(--color-accent)]"
+            }`}
           >
             <Grid className="w-4 h-4" />
           </button>
           <button
-            onClick={() => setViewMode('list')}
-            className={`p-2 rounded ${viewMode === 'list' ? 'bg-[var(--color-ink)] text-[var(--color-accent)]' : 'hover:bg-[var(--color-accent)]'}`}
+            onClick={() => setViewMode("list")}
+            className={`p-2 rounded ${
+              viewMode === "list"
+                ? "bg-[var(--color-ink)] text-[var(--color-accent)]"
+                : "hover:bg-[var(--color-accent)]"
+            }`}
           >
             <List className="w-4 h-4" />
           </button>
@@ -124,7 +145,7 @@ export default function ReleasesGrid({ books }: ReleasesGridProps) {
       </div>
 
       {/* Books Grid/List */}
-      {viewMode === 'grid' ? (
+      {viewMode === "grid" ? (
         <div className="flex overflow-x-auto gap-4 sm:gap-6 md:gap-8 pb-8 sm:pb-12 no-scrollbar snap-x snap-mandatory max-w-[100vw]">
           {paginatedBooks.map((book) => (
             <BookCard key={book.id} book={book} />
@@ -139,12 +160,16 @@ export default function ReleasesGrid({ books }: ReleasesGridProps) {
             >
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="w-full sm:w-32 flex-shrink-0">
-                  <div className={`aspect-square bg-gradient-to-br ${book.coverColor} rounded-lg`} />
+                  <div
+                    className={`aspect-square bg-gradient-to-br ${book.coverColor} rounded-lg`}
+                  />
                 </div>
                 <div className="flex-1">
                   <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                     <div>
-                      <h3 className="font-display text-xl sm:text-2xl mb-1">{book.title}</h3>
+                      <h3 className="font-display text-xl sm:text-2xl mb-1">
+                        {book.title}
+                      </h3>
                       <p className="text-sm opacity-70 mb-2">{book.author}</p>
                     </div>
                     <div className="text-right">
@@ -152,19 +177,28 @@ export default function ReleasesGrid({ books }: ReleasesGridProps) {
                         ${book.price.toFixed(2)}
                       </div>
                       {book.originalPrice && (
-                        <div className="text-xs line-through opacity-40">${book.originalPrice.toFixed(2)}</div>
+                        <div className="text-xs line-through opacity-40">
+                          ${book.originalPrice.toFixed(2)}
+                        </div>
                       )}
                     </div>
                   </div>
-                  <p className="text-sm opacity-80 mb-3 line-clamp-2">{book.description}</p>
+                  <p className="text-sm opacity-80 mb-3 line-clamp-2">
+                    {book.description}
+                  </p>
                   <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
-                    <span className="opacity-60">{book.genres.join(' • ')}</span>
+                    <span className="opacity-60">
+                      {book.genres.join(" • ")}
+                    </span>
                     <span className="opacity-60">•</span>
                     <span className="opacity-60">{book.format}</span>
                     <span className="opacity-60">•</span>
                     <span className="opacity-60">{book.pageCount} pages</span>
                     <span className="opacity-60">•</span>
-                    <span className="opacity-60">Rating: {book.rating} ({book.reviewCount.toLocaleString()})</span>
+                    <span className="opacity-60">
+                      Rating: {book.rating} ({book.reviewCount.toLocaleString()}
+                      )
+                    </span>
                   </div>
                 </div>
               </div>
@@ -198,4 +232,3 @@ export default function ReleasesGrid({ books }: ReleasesGridProps) {
     </div>
   );
 }
-
