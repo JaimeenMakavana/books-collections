@@ -2,6 +2,7 @@
 
 import { Menu, Search, ShoppingCart } from 'lucide-react';
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Navigation() {
   useEffect(() => {
@@ -17,13 +18,13 @@ export default function Navigation() {
         </button>
 
         {/* Logo */}
-        <a href="#" className="text-xl sm:text-2xl md:text-3xl font-display tracking-tighter flex items-center gap-1 flex-shrink-0">
+        <Link href="/" className="text-xl sm:text-2xl md:text-3xl font-display tracking-tighter flex items-center gap-1 flex-shrink-0">
           BOOK<span className="text-[var(--color-accent)]" style={{ WebkitTextStroke: '1px var(--color-ink)' }}>SHELF</span>
-        </a>
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8 font-semibold text-sm tracking-tight">
-          <a href="#" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">NEW RELEASES</a>
+          <Link href="/releases" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">NEW RELEASES</Link>
           <a href="#" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">BESTSELLERS</a>
           <a href="#" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">GENRES</a>
           <a href="#" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">COLLECTIONS</a>
