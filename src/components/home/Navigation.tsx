@@ -25,9 +25,9 @@ export default function Navigation() {
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-6 lg:gap-8 font-semibold text-sm tracking-tight">
           <Link href="/releases" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">NEW RELEASES</Link>
-          <a href="#" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">BESTSELLERS</a>
-          <a href="#" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">GENRES</a>
-          <a href="#" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">COLLECTIONS</a>
+          <Link href="/best-sellers" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">BESTSELLERS</Link>
+          <Link href="/genre" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">GENRES</Link>
+          <Link href="/collections" className="hover:text-[var(--color-accent)] hover:bg-[var(--color-ink)] px-3 py-1 rounded transition-colors">COLLECTIONS</Link>
         </div>
 
         {/* Actions */}
